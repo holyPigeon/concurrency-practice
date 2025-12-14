@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 public class StockService {
     private final StockRepository stockRepository;
 
-    @Transactional
-    public void decreaseStock (Long id, Long quantity) {
+//    @Transactional
+    public synchronized void decreaseStock (Long id, Long quantity) {
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상품의 재고를 찾을 수 없습니다. ID: " + id));
         stock.decreaseQuantity(quantity);
